@@ -43,16 +43,17 @@ class App extends Component {
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies,  } = this.state;
+    console.log(this.state.movies)
        return (
       <div className="App">
         <Router>
           <SearchMovie handleInputChange={this.handleInputChange} movieTitle={this.state.movieTitle}  movies={movies}path="/"/>
-          <Details path="/details/:id" />
+          <Details path="/details/:id"  moviesID={movies}/>
         </Router>
       </div>
     );
-  }
+  }g
 }
 
 export default App;
