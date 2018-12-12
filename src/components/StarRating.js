@@ -7,7 +7,7 @@ const StarRating = props => {
 
   return (
     <ReactStars
-      count={6}
+      count={8}
       value={props.note}
       size={24}
       color2={'#ffd700'}

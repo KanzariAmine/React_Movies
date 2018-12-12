@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link, Router } from '@reach/router';
 import Cards from './components/Cards';
 import SearchMovie from './components/SearchMovie';
+import Details from './components/Details'
 import './App.css';
 
 class App extends Component {
@@ -44,8 +46,10 @@ class App extends Component {
     const { movies } = this.state;
        return (
       <div className="App">
-       <SearchMovie handleInputChange={this.handleInputChange} movieTitle={this.state.movieTitle}/>
-       <Cards movies={movies}/>
+        <Router>
+          <SearchMovie handleInputChange={this.handleInputChange} movieTitle={this.state.movieTitle}  movies={movies}path="/"/>
+          <Details path="/details/:id" />
+        </Router>
       </div>
     );
   }
