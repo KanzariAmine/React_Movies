@@ -7,7 +7,7 @@ const  Cards = props => {
     const {movies} = props;
     
     return (
-      <div className="container">
+      <div className="containerr">
       {
         movies.slice(0, 10).map(movie => {
          return(

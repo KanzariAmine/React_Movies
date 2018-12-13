@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Router } from '@reach/router';
-import Cards from './components/Cards';
+import { Router } from '@reach/router';
 import SearchMovie from './components/SearchMovie';
 import Details from './components/Details'
 import './App.css';
@@ -44,7 +43,6 @@ class App extends Component {
 
   render() {
     const { movies,  } = this.state;
-    console.log(this.state.movies)
        return (
       <div className="App">
         <Router>
