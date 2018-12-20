@@ -11,8 +11,8 @@ class App extends Component {
 
     this.state = {
       movieTitle: "",
-      initalMovies: [],
-      movies:[]
+      // initalMovies: [],
+      // movies:[]
     }
   }
 
@@ -27,28 +27,32 @@ class App extends Component {
       }else{
         movies = []
       }
-      this.setState({
-        initalMovies: movies,
-        movies: movies
-      })
+      this.props.setMovies(movies)
+      // this.setState({
+      //   initalMovies: movies,
+      //   movies: movies
+      // })
   };
 
   handleInputChange = event => { 
-    let movies = this.state.initalMovies.filter(movie => movie.title.toLowerCase().includes(event.target.value.toLowerCase()));
+   // let movies = this.state.initialMovies.filter(movie => movie.title.toLowerCase().includes(event.target.value.toLowerCase()));
     this.setState({
       movieTitle:event.target.value,
-      movies
+     // movies
     }) 
+    console.log(this.state.movieTitle)
+    this.props.filterMovies(this.state.movieTitle)
    
   }
 
   render() {
-    console.log(this.state)
-    const { movies,  } = this.state;
+    
+    //const { movies } = this.props.movie;
+    console.log(this.props.initialMovies)
        return (
       <div className="App">
         <Router>
-          <SearchMovie handleInputChange={this.handleInputChange} movieTitle={this.state.movieTitle}  movies={movies}path="/"/>
+          <SearchMovie handleInputChange={this.handleInputChange} movieTitle={this.state.movieTitle}  movies={this.props.movie}path="/"/>
           <Details path="/details/:id"  moviesID={movies}/>
         </Router>
       </div>
@@ -56,8 +60,18 @@ class App extends Component {
   }g
 }
 
+const mapStateToProps = state => {
+  return{
+    movie: state.movies,
+    initialMovies: state.initialMovies
+  }
+}
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setMovies: (movies) => dispatch({type: 'SET_MOVIES', movies: movies, initialMovies: movies}),
+    filterMovies: (movieTitle) => dispatch({type: 'FILTER_MOVIES', title: movieTitle})
+  }
+}
 
-
-
-export default connect()(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
