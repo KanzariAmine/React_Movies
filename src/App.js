@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Router } from '@reach/router';
+import  { connect } from 'react-redux';
 import SearchMovie from './components/SearchMovie';
 import Details from './components/Details'
 import './App.css';
@@ -42,6 +43,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state)
     const { movies,  } = this.state;
        return (
       <div className="App">
@@ -54,4 +56,8 @@ class App extends Component {
   }g
 }
 
-export default App;
+
+
+
+
+export default connect()(App);
