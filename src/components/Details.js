@@ -19,6 +19,7 @@ class Details extends Component{
   }
   render(){
     const { movie } = this.state
+    console.log(movie)
     return(
       <div>
         <Link to="/"><h1>React Search Movies</h1></Link> 

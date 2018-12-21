@@ -1,11 +1,11 @@
 import React from 'react';
 import StarRating from './StarRating';
 import { Link } from '@reach/router';
-
+import { connect } from 'react-redux';
 
 const  Cards = props => {
     const {movies} = props;
-    
+    console.log(props)
     return (
       <div className="containerr">
       {
@@ -17,6 +17,13 @@ const  Cards = props => {
             </Link>
             <div className="movie_title">
               <h1>{movie.title}</h1>
+              <span onClick={() => props.favMovies(movie.id)}>
+                {
+                  (!props.favMoviesID.includes(movie.id)) ? '☆' : '★'
+                }
+                  
+                
+              </span>
             </div>
             <StarRating note={movie.vote_average}/>
             <div className="summary_title">
@@ -34,4 +41,19 @@ const  Cards = props => {
     );
   }
 
-export default Cards;
+  const mapStateToProps = state => {
+    return{
+      favMoviesID: state.favMovies
+    }
+  }
+
+  const mapDispatchToProps = dispatch => {
+    return{
+      favMovies: (movieID) => dispatch({type: 'FAV_MOVIES', id: movieID})
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cards);
+
+
+ 

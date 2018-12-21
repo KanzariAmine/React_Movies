@@ -40,20 +40,28 @@ class App extends Component {
       movieTitle:event.target.value,
      // movies
     }) 
-    console.log(this.state.movieTitle)
+    //console.log(this.state.movieTitle)
     this.props.filterMovies(this.state.movieTitle)
    
   }
 
   render() {
     
-    //const { movies } = this.props.movie;
-    console.log(this.props.initialMovies)
+    const { movies } = this.props.movie;
+    //console.log(this.props.movie)
        return (
       <div className="App">
         <Router>
-          <SearchMovie handleInputChange={this.handleInputChange} movieTitle={this.state.movieTitle}  movies={this.props.movie}path="/"/>
-          <Details path="/details/:id"  moviesID={movies}/>
+          <SearchMovie 
+            handleInputChange={this.handleInputChange} 
+            movieTitle={this.state.movieTitle}  
+            movies={this.props.movie} 
+            path="/"
+          />
+          <Details 
+            path="/details/:id"  
+            moviesID={movies}
+          />
         </Router>
       </div>
     );

@@ -1,4 +1,4 @@
-const reducer = (state={movies:[], initialMovies:[]}, action) => {
+const reducer = (state={movies:[], initialMovies:[], favMovies:[]}, action) => {
   switch(action.type){
     case 'SET_MOVIES':
       return{
@@ -11,6 +11,17 @@ const reducer = (state={movies:[], initialMovies:[]}, action) => {
       return{
         ...state,
         movies: updateMoviesArray
+      }  
+    case 'FAV_MOVIES':
+        let  updateFavMoviesArray
+      if(state.favMovies.includes(action.id)){
+          updateFavMoviesArray = state.favMovies.filter(id => id !== action.id)
+      }else{
+          updateFavMoviesArray = state.favMovies.concat(action.id)
+      }
+      return{
+          ...state,
+          favMovies: updateFavMoviesArray
       }  
     default:
       return state  
