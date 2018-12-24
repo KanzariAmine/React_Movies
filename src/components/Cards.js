@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 const  Cards = props => {
     const {movies} = props;
-    console.log(props)
     return (
       <div className="containerr">
       {
@@ -21,8 +20,6 @@ const  Cards = props => {
                 {
                   (!props.favMoviesID.includes(movie.id)) ? '☆' : '★'
                 }
-                  
-                
               </span>
             </div>
             <StarRating note={movie.vote_average}/>

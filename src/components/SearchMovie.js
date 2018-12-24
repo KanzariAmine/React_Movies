@@ -4,7 +4,7 @@ import Cards from './Cards';
 
 class SearchMovie extends Component{
   render(){
-    const { handleInputChange, movieTitle, movies} = this.props
+    const { handleInputChange, movieTitle, movies, toggleModal} = this.props
     return(
       <Fragment>
         <header>
@@ -12,6 +12,7 @@ class SearchMovie extends Component{
             <form>
               <input type="text" placeholder="Search Movise..." value={movieTitle} onChange={handleInputChange}/>
               <input type="button" value="Search"/>
+              <input type="button" value="Favoris Movies" onClick={ toggleModal}/>
             </form>
         </header>
         <Cards movies={movies}/>

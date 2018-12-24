@@ -172,3 +172,25 @@ a >h1{
 .row{
   height: 400px;
 }
+#modal {
+  background-color: rgba(196, 194, 194, 0.7);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#modal:empty {
+  display: none;
+}
+#modal > div {
+  background-color: white;
+  max-width: 500px;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: left;
+}

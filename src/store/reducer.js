@@ -14,6 +14,7 @@ const reducer = (state={movies:[], initialMovies:[], favMovies:[]}, action) => {
       }  
     case 'FAV_MOVIES':
         let  updateFavMoviesArray
+        //let obj={id: action.id, title: action.title}
       if(state.favMovies.includes(action.id)){
           updateFavMoviesArray = state.favMovies.filter(id => id !== action.id)
       }else{

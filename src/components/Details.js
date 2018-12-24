@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
+import { connect } from 'react-redux';
 import StarRating from './StarRating';
 
 class Details extends Component{
@@ -19,7 +20,7 @@ class Details extends Component{
   }
   render(){
     const { movie } = this.state
-    console.log(movie)
+    console.log(movie.id)
     return(
       <div>
         <Link to="/"><h1>React Search Movies</h1></Link> 
@@ -30,6 +31,11 @@ class Details extends Component{
             </div>
             <div className="col-md-6">
             <h1>{movie.title}</h1>
+            <span onClick={() => this.props.favMovies(movie.id)}>
+              {
+                (!this.props.favMoviesID.includes(movie.id)) ? '☆' : '★'
+              }
+            </span>
             <StarRating className="rank" note={movie.vote_average}/>
             <div className="info">
               <ul>
@@ -52,4 +58,18 @@ class Details extends Component{
   }
 }
 
-export default Details
+
+const mapStateToProps = state => {
+  return{
+    favMoviesID: state.favMovies
+
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    favMovies: (movieID) => dispatch({type: 'FAV_MOVIES', id: movieID})
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Details)
