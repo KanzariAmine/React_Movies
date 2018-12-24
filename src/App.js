@@ -56,7 +56,7 @@ class App extends Component {
   
   }
   render() {
-    const { movies, favorisMovies } = this.props;
+    const { movies } = this.props;
     const favoriteMoviesObj = this.getListFav();
     console.log('favoriteMoviesObj', favoriteMoviesObj)
     return (
@@ -83,9 +83,9 @@ class App extends Component {
                 favoriteMoviesObj.map(favMovie => 
                   <li key={favMovie.id}>
                   {favMovie.title}
-                  {/* <span onClick={() => this.props.favMovies(favMovie.id)}>
+                  <span onClick={() => this.props.favMovies(favMovie.id)}>
                     {(!this.props.favMoviesID.includes(favMovie.id)) ? '☆' : '★'}
-                  </span> */}
+                  </span>
                   </li>
                 )
                }
@@ -104,7 +104,9 @@ const mapStateToProps = state => {
   return{
     movies: state.movies,
     initialMovies: state.initialMovies,
-    favorisMovies: state.favMovies
+    favorisMovies: state.favMovies,
+    favMoviesID: state.favMovies
+
   }
 }
 

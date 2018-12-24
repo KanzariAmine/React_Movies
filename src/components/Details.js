@@ -43,9 +43,6 @@ class Details extends Component{
                 <li><h2>Time: </h2>{movie.runtime} min</li>
                 <li><h2>Language:</h2>{movie.original_language}</li>
                 <li><h2>Budget:</h2>{movie.budget} USD</li>
-                {
-                  console.log(movie.genres)
-                }
               </ul>
             </div>
             <h3>Description</h3>

@@ -194,3 +194,7 @@ a >h1{
   border-radius: 5px;
   text-align: left;
 }
+
+#modal > div > ul > li{
+  float: none
+}
