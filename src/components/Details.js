@@ -5,7 +5,8 @@ import StarRating from './StarRating';
 
 class Details extends Component{
   state = {
-    movie:[]
+    movie:[],
+    nextID: ''
   }
 
   async componentDidMount(){
@@ -16,12 +17,40 @@ class Details extends Component{
     this.setState({
       movie: data
     })
-    
   }
+
+ getNextPreviousMovie() {
+    const IDs = this.props.initialMovies.slice(0,10).map(movie => movie.id)
+     let i = 0
+     let found = false;
+    while(!found && i < IDs.length){ 
+      if (IDs[i] === parseInt(this.props.id)) {
+        found = true;     
+      }else{
+        i++
+      }
+    }
+    if (i === 0) return [IDs[i + 1], false];
+    if (i === IDs.length - 1) return [false, IDs[i - 1]];
+    return [IDs[i + 1], IDs[i - 1]]
+  }
+   
+  async componentWillReceiveProps(nextProps){
+  if(this.props.id !== nextProps.id){
+    let res = await fetch(`https://api.themoviedb.org/3/movie/${nextProps.id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+    let data = await res.json();
+  
+    this.setState({
+      movie: data
+    })
+  }
+}
+
+  
   render(){
-    const { movie } = this.state
-    console.log(movie.id)
-    return(
+    const { movie } = this.state;
+    let ID = this.getNextPreviousMovie();
+      return(
       <div>
         <Link to="/"><h1>React Search Movies</h1></Link> 
         <div className="container">
@@ -48,6 +77,20 @@ class Details extends Component{
             <h3>Description</h3>
             <p>{movie.overview}</p>
             </div>
+            {
+              ID[0] ? 
+            <Link to={`/details/${ID[0]}`}>
+              <button type="button" value="Next" >Next</button>
+            </Link> : <button type="button" value="Next"  disabled>Next</button>
+            }
+            
+            { ID[1] ?
+              <Link to={`/details/${ID[1]}`}>
+              <button type="button" value="Previous">Previous</button>
+             </Link> : <button type="button" value="Previous" disabled>Previous</button>
+
+            }
+
           </div>
         </div>
       </div>
@@ -58,8 +101,8 @@ class Details extends Component{
 
 const mapStateToProps = state => {
   return{
-    favMoviesID: state.favMovies
-
+    favMoviesID: state.favMovies,
+    initialMovies: state.initialMovies
   }
 }
 const mapDispatchToProps = dispatch => {

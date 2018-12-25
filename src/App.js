@@ -58,7 +58,6 @@ class App extends Component {
   render() {
     const { movies } = this.props;
     const favoriteMoviesObj = this.getListFav();
-    console.log('favoriteMoviesObj', favoriteMoviesObj)
     return (
       <div className="App">
         <Router>

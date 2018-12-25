@@ -11,7 +11,6 @@ class SearchMovie extends Component{
         <h1>React Search Movies</h1>
             <form>
               <input type="text" placeholder="Search Movise..." value={movieTitle} onChange={handleInputChange}/>
-              <input type="button" value="Search"/>
               <input type="button" value="Favoris Movies" onClick={ toggleModal}/>
             </form>
         </header>
