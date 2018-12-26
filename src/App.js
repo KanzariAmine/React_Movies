@@ -3,7 +3,7 @@ import { Router } from '@reach/router';
 import  { connect } from 'react-redux';
 import SearchMovie from './components/SearchMovie';
 import Details from './components/Details';
-import Modal from './components/Modal'
+import Modal from './components/Modal';
 import './App.css';
 
 class App extends Component {
@@ -13,8 +13,7 @@ class App extends Component {
     this.state = {
       movieTitle: "",
       showModal: false,
-      // initalMovies: [],
-      // movies:[]
+      showFilter: false
     }
   }
 
@@ -56,6 +55,7 @@ class App extends Component {
   
   }
   render() {
+    const { showModal } = this.state
     const { movies } = this.props;
     const favoriteMoviesObj = this.getListFav();
     return (
@@ -73,8 +73,9 @@ class App extends Component {
             moviesID={movies}
           />
         </Router>
+        
         {
-           (this.state.showModal) ? (
+           (showModal) ? (
             <Modal>
               <h1>Favoris Movies</h1>
               <ul>

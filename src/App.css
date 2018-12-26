@@ -198,3 +198,18 @@ a >h1{
 #modal > div > ul > li{
   float: none
 }
+.container_filter{
+  background: #FFF;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.from{
+  padding: 10px;
+}
+.to{
+  padding: 10px;
+}
+label{
+  padding: 15px
+}
