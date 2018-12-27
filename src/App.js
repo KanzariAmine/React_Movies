@@ -16,11 +16,6 @@ class App extends Component {
       showFilter: false
     }
   }
-
-  toggleModal = () => this.setState({showModal: !this.state.showModal});
-    
-  
-
   async componentDidMount(){
       let response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
       let data =  await response.json();
@@ -30,29 +25,23 @@ class App extends Component {
         movies = data.results
       }else{
         movies = []
-      }
-      
+      }   
       this.props.setMovies(movies)
-      // this.setState({
-      //   initalMovies: movies,
-      //   movies: movies
-      // })
-      
   };
 
+  toggleModal = () => this.setState({showModal: !this.state.showModal});
+
   handleInputChange = event => { 
-   // let movies = this.state.initialMovies.filter(movie => movie.title.toLowerCase().includes(event.target.value.toLowerCase()));
     this.setState({
       movieTitle:event.target.value,
-     // movies
     }) 
-    this.props.filterMovies(this.state.movieTitle)
+    // [{field: title, value: target.value}]
+    this.props.filterMovies([{field: 'filterTitle', value: event.target.value}])
   }
 
   getListFav(){
     const { movies, favorisMovies } = this.props;
    return movies.filter(movie => favorisMovies.includes(movie.id))
-  
   }
   render() {
     const { showModal } = this.state
@@ -106,14 +95,13 @@ const mapStateToProps = state => {
     initialMovies: state.initialMovies,
     favorisMovies: state.favMovies,
     favMoviesID: state.favMovies
-
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setMovies: (movies) => dispatch({type: 'SET_MOVIES', movies: movies, initialMovies: movies}),
-    filterMovies: (movieTitle) => dispatch({type: 'FILTER_MOVIES', title: movieTitle}),
+    filterMovies: (filters) => dispatch({type: 'FILTER_MOVIES', payload:{filters}}),
     favMovies: (movieID) => dispatch({type: 'FAV_MOVIES', id: movieID})
   }
 }
