@@ -13,7 +13,7 @@
 
 > Redux
 
-> Reach Router
+> React Router
 
 ## Quick Start:
 
